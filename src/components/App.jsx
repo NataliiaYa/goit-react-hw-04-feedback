@@ -9,14 +9,9 @@ const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
-  // state = {
-  //   good: 0,
-  //   neutral: 0,
-  //   bad: 0,
 
-
-  const handleVote = option => {
-    switch (option) {
+  const handleVote = btnName => {
+    switch (btnName) {
       case 'good':
         setGood(prev => prev + 1);
         break;
@@ -27,7 +22,7 @@ const App = () => {
         setBad(prev => prev + 1);
         break;
       default:
-        console.log('Ooops... something was wrong')
+        console.log('Ooops... something was wrong');
     }
   };
 
@@ -47,7 +42,9 @@ const App = () => {
   return (
     <div className={css.feedbackArea}>
       <Section title="Please leave feedback">
-        <FeedbackOptions onLeaveFeedback={handleVote} />
+        <FeedbackOptions
+          options={Object.keys({ good, neutral, bad })}
+          onLeaveFeedback={handleVote} />
       </Section>
       <Section title="Statistics">
         {countTotalFeedback() === 0 ? (
@@ -67,3 +64,4 @@ const App = () => {
 };
 
 export default App;
+
